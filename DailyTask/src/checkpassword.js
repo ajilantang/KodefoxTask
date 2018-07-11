@@ -1,5 +1,5 @@
 // @flow
-function checkPassword(password) {
+function checkPassword(password: string) {
   let character = password.split('');
   if (password.length < 6) {
     return {
@@ -19,7 +19,11 @@ function checkPassword(password) {
   };
 }
 
-function isRequiredPass(listChar, minBound, maxBound) {
+function isRequiredPass(
+  listChar: Array<string>,
+  minBound: string,
+  maxBound: string,
+) {
   let minChar = minBound.charCodeAt(0);
   let maxChar = maxBound.charCodeAt(0);
   for (let char of listChar) {
