@@ -3,8 +3,12 @@ type InitialState = {
   id: number;
   createdAt: string;
 };
-export default class dataStore {
-  data: Array<Object> = [];
+type DataStore = {
+  [string]: InitialState;
+};
+type CallBackForEachFunction = (value: DataStore) => mixed;
+export default class StoreData {
+  data: Array<DataStore> = [];
   constructor(instanceState: Object) {
     let createdAt = `${Date.now()}`;
     let id = this.data.length;
@@ -22,7 +26,7 @@ export default class dataStore {
   getDataStores(): Array<Object> {
     return this.data;
   }
-  forEach(func: (param: Object) => boolean) {
+  filterObject(func: (param: Object) => boolean) {
     let result = [];
     for (let obj of this.data) {
       if (func(obj)) {
@@ -31,7 +35,14 @@ export default class dataStore {
     }
     return result;
   }
-  getMapDataStores<T>(func: (param: Object) => T) {
+  forEach(func: CallBackForEachFunction) {
+    let result = [];
+    for (let obj of this.data) {
+      result = result.concat(func(obj));
+    }
+    return result;
+  }
+  getMapDataStores<T>(func: (param: DataStore) => T) {
     let result = [];
     for (let obj of this.data) {
       result = result.concat(func(obj));
