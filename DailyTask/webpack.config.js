@@ -17,6 +17,7 @@ var loaders = [
 module.exports = {
   entry: {
     main: './src/main.js',
+    dayseven: './src/dayseven.js',
   },
   output: {
     path: path.join(__dirname, 'assets'),
