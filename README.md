@@ -15,7 +15,7 @@
 
 <body>
   <!-- <script src="./dayseven.js"></script> --> *
-  <script src="./dayseven.js"></script> --->comment this one
+  <script src="./main.js"></script> --->comment this one
 </body>
 
 </html>```
