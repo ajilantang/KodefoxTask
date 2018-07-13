@@ -1,8 +1,8 @@
 {
-  "name": "DailyTask",
+  "name": "trial",
   "version": "0.1.0",
   "private": true,
-  "description": "DailyTask",
+  "description": "trial",
   "scripts": {
     "start": "webpack-dev-server --content-base assets/",
     "build": "webpack",
@@ -30,24 +30,31 @@
     "css-loader": "^1.0.0",
     "css-modules-require-hook": "^4.2.3",
     "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.1.0",
-    "eslint-plugin-babel": "^5.1.0",
+    "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.10.0",
     "flow-bin": "^0.76.0",
     "flow-typed": "^2.5.1",
-    "jest": "^23.3.0",
+    "jest": "^23.4.0",
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.6.2",
     "style-loader": "^0.21.0",
-    "webpack": "^4.15.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack": "3.x.x",
+    "webpack-dev-server": "2.x.x"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setup.js"
+  },
   "prettier": {
     "bracketSpacing": false,
     "singleQuote": true,

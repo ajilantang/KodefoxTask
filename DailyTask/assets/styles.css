@@ -1,0 +1,7 @@
+ul {
+  list-style: square;
+}
+
+ul li:before {
+  content: '\00BB \0020';
+}

@@ -15,12 +15,6 @@ export default class EventEmitter {
         if (eventList) {
           eventList.delete(eventListener);
         }
-        let history = {
-          eventName: eventName,
-          event: 'delete',
-          eventListener,
-        };
-        this.history.push(history);
       },
       add: () => {
         if (eventList == null) {
@@ -28,6 +22,12 @@ export default class EventEmitter {
           this.events.set(eventName, eventList);
         }
         eventList.add(eventListener);
+        let history = {
+          eventName: eventName,
+          event: 'add',
+          eventListener,
+        };
+        this.history.push(history);
       },
     };
   }
