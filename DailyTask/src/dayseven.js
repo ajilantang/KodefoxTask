@@ -79,7 +79,7 @@ function adapter(content: string): string {
   return `
   <h1>Todo List</h1>
   ${content}
-  <form action="/my-handling-form-page" method="post"> 
+  <form action="/my-handling-form-page" method="post">
   <div>
     <label for="task">Task</label>
     <input type="text" value  ="${

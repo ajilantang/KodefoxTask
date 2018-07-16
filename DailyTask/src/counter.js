@@ -1,7 +1,9 @@
 // @flow
-
+import renderApp from './main';
 export default function createCounter() {
   let count = 0;
+  console.log('yee', count);
+
   return {
     inc: () => {
       count += 1;
@@ -13,15 +15,15 @@ export default function createCounter() {
   };
 }
 
-it('should return 4', () => {
-  let counter = createCounter();
-  counter.inc();
-  counter.inc();
-  counter.inc();
-  counter.inc();
-  counter.inc();
-  counter.inc();
-  counter.dec();
-  counter.dec();
-  expect(counter.getCount()).toEqual(4);
-});
+// it('should return 4', () => {
+//   let counter = createCounter();
+//   counter.inc();
+//   counter.inc();
+//   counter.inc();
+//   counter.inc();
+//   counter.inc();
+//   counter.inc();
+//   counter.dec();
+//   counter.dec();
+//   expect(counter.getCount()).toEqual(4);
+// });
