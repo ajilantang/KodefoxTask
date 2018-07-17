@@ -4,22 +4,29 @@ import eventHandler from './eventHandler';
 import reRender from './main';
 import type {InitialState, Todo} from './types/State';
 
-let defaultState = {
-  newTask: '',
-  todoItems: [],
-};
+let store = eventHandler();
 
-let event = eventHandler();
-export default function App(props: InitialState = defaultState) {
+export default function App(props: InitialState) {
   let {todoItems} = props;
-  console.log('propss', props.newTask, 'euy');
+  let todoDone = todoItems.filter((item) => item.isDone);
+  let todoNotDone = todoItems.filter((item) => !item.isDone);
+  let groupingTodo = [...todoNotDone, ...todoDone];
+  let localTyping = false;
+  let {newTask} = store.getTodosItem();
   return todoItems ? (
     <div>
-      <ul>{todoItems.map((todo) => getTodo(todo))}</ul>
-      <input type="text" onChange={event.onTypingtodo} />
+      <ul>{groupingTodo.map((todo) => getTodo(todo))}</ul>
+      <input
+        type="text"
+        value={newTask}
+        onChange={(event) => {
+          let state = store.onTypingtodo(event);
+          reRender(state);
+        }}
+      />
       <button
         onClick={() => {
-          let result = event.addnewItem();
+          let result = store.addnewItem();
           reRender(result);
         }}
       >
@@ -30,16 +37,17 @@ export default function App(props: InitialState = defaultState) {
     <div>Please create your Todo list</div>
   );
 }
+
 function getTodo(props: Todo) {
   let {content, isDone, id} = props;
   return (
     <li
       onClick={() => {
-        let result = event.toogleDone(id);
+        let result = store.toogleDone(id);
         reRender(result);
       }}
     >
-      {isDone ? content : <s>{content}</s>}
+      {isDone ? content : <s key={id}>{content}</s>}
     </li>
   );
 }
