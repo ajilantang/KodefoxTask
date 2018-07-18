@@ -1,17 +1,8 @@
 //@flow
-import type {
-  InitialState,
-  UpdateFunction,
-  EventHandler,
-  Event,
-} from './types/State';
-
+import type {State, UpdateFunction, EventHandler, Event} from './types/State';
+import {initialState} from './InitialState/Todo';
 export default function eventHandler() {
-  let state = {
-    newTask: '',
-    todoItems: [],
-    isTyping: false,
-  };
+  let state = initialState;
   return {
     toogleDone: (taskId: number) => {
       let {todoItems} = state;
@@ -19,7 +10,6 @@ export default function eventHandler() {
         (item) => (item.id === taskId ? {...item, isDone: !item.isDone} : item),
       );
       state = {...state, todoItems: result};
-      return state;
     },
     addnewItem: () => {
       let {newTask, todoItems} = state;
@@ -30,14 +20,11 @@ export default function eventHandler() {
       };
       state = {
         todoItems: [...todoItems, newTodoItems],
-        isTyping: false,
         newTask: '',
       };
-      return state;
     },
     onTypingtodo: (event: Event) => {
-      state = {...state, newTask: event.target.value, isTyping: true};
-      return state;
+      state = {...state, newTask: event.target.value};
     },
     getTodosItem: () => {
       return state;

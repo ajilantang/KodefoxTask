@@ -2,11 +2,10 @@
 import React, {createElement} from 'react';
 import eventHandler from './eventHandler';
 import reRender from './main';
-import type {InitialState, Todo} from './types/State';
+import type {State, Todo, Event} from './types/State';
 
 let store = eventHandler();
-
-export default function App(props: InitialState) {
+export default function App(props: State) {
   let {todoItems} = props;
   let todoDone = todoItems.filter((item) => item.isDone);
   let todoNotDone = todoItems.filter((item) => !item.isDone);
@@ -19,14 +18,16 @@ export default function App(props: InitialState) {
       <input
         type="text"
         value={newTask}
-        onChange={(event) => {
-          let state = store.onTypingtodo(event);
+        onChange={(event: Event) => {
+          store.onTypingtodo(event);
+          let state = store.getTodosItem();
           reRender(state);
         }}
       />
       <button
         onClick={() => {
-          let result = store.addnewItem();
+          store.addnewItem();
+          let result = store.getTodosItem();
           reRender(result);
         }}
       >
@@ -43,14 +44,12 @@ function getTodo(props: Todo) {
   return (
     <li
       onClick={() => {
-        let result = store.toogleDone(id);
+        store.toogleDone(id);
+        let result = store.getTodosItem();
         reRender(result);
       }}
     >
       {isDone ? content : <s key={id}>{content}</s>}
     </li>
   );
-}
-function onSubmitTodo() {
-  return <button>Activate Lasers</button>;
 }
