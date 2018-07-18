@@ -4,8 +4,8 @@ export type Todo = {
   isDone: boolean,
   content: string,
 };
-export type InitialState = {
-  isTyping: boolean,
+export type State = {
+  inputValue?: string,
   todoItems: Array<Todo>,
   newTask: string,
 };
@@ -15,6 +15,6 @@ export type Event = {
   },
 };
 
-export type UpdateFunction = (InitialState) => InitialState;
+export type UpdateFunction = (State) => State;
 export type EventHandler = {[evenName: string]: UpdateFunction};
 export type CreateTodo = (name: string, task: string) => Todo;

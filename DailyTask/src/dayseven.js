@@ -1,15 +1,18 @@
 //@flow
-import type {InitialState, Todos} from './types/State';
+import type {Todo} from './types/State';
 
 let state = {
   newTask: '',
   todoItems: [],
 };
-
-function changeStatus(item: Todos): Todos {
+type State = {
+  newTask: string,
+  todoItems: Array<Todo>,
+};
+function changeStatus(item: Todo): Todo {
   return {...item, isDone: !item.isDone};
 }
-export function todoEvent(eventName: string, param: mixed): InitialState {
+export function todoEvent(eventName: string, param: mixed): Object {
   let oldState = state; //global
   switch (eventName) {
     case 'todos':
@@ -21,30 +24,25 @@ export function todoEvent(eventName: string, param: mixed): InitialState {
       return {...oldState, todoItems};
     }
     case 'addNewItems': {
-      //   console.log('bodo', {...oldState, todos});
       let todo = {
-        id: oldState.todoItems.length,
+        id: oldState.todoItems.length ? 1 : oldState.todoItems.length,
         isDone: false,
-        task: param,
+        content: param,
       };
-      let todoItems = oldState.todoItems
-        ? oldState.todoItems.concat(todo)
-        : {todoItems: []};
+      let todoItems = oldState.todoItems ? oldState.todoItems.concat(todo) : [];
       return {...oldState, todoItems};
     }
     case 'onInputText':
-      //   console.log('kesini', {...oldState, obj});
-      let newTask = param;
-      return {...oldState, newTask};
+      return {...oldState, newTask: param};
     default:
       return oldState;
   }
 }
-function getTodo(item: Todos): string {
-  let content = item.isDone ? `<s>${item.task}</s>` : `${item.task}`;
+function getTodo(item: Todo): string {
+  let content = item.isDone ? `<s>${item.content}</s>` : `${item.content}`;
   return content;
 }
-function getListTodos(listTodos: InitialState): string {
+function getListTodos(listTodos: State): string {
   let result = listTodos.todoItems
     .map(
       (data) =>

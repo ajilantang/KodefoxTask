@@ -2,7 +2,6 @@
 import renderApp from './main';
 export default function createCounter() {
   let count = 0;
-  console.log('yee', count);
 
   return {
     inc: () => {
