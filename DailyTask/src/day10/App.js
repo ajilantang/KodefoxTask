@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import type {Todo} from '../types/State';
 import TodoForm from './TodoForm';
 import SearchTodo from './SearchTodo';
+import fetchGithubData from '../ContactManager/Api/ApiGithub';
 import TodoList from './TodoList';
 type Props = {};
 export type State = {
@@ -91,6 +92,8 @@ export class App extends Component<Props, State> {
     });
   };
   render() {
+    let res = fetchGithubData('ajilantang').then((res) => console.log(res));
+    res;
     let {todoItems, inputValue, searchValue, selectedIndex} = this.state;
     let todoOnSearch;
     if (searchValue === '') {
