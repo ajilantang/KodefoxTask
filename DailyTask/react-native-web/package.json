@@ -1,0 +1,11 @@
+{
+  "name": "react-native-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-native-web": "^0.8.9"
+  }
+}
