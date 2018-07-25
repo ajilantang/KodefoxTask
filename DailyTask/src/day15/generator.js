@@ -1,5 +1,5 @@
 // @flow
-
+import fetch from 'node-fetch';
 type Action =
   | {
       type: 'WAIT',
@@ -13,10 +13,10 @@ type Obj = {
   name: string,
 };
 type Data = {
-  value: Action | Array<Obj>,
+  value: Action | Array<Object> | null,
   done: boolean,
 };
-function* getUserRepos(userID: string): Generator<Action, Data, Data> {
+function* getUserRepos(userID: string): Generator<*, *, *> {
   yield {type: 'WAIT', ms: 200};
   let repos = yield {
     type: 'FETCH',
@@ -28,7 +28,7 @@ function* getUserRepos(userID: string): Generator<Action, Data, Data> {
 
 function run(gen): Promise<mixed> {
   return new Promise((resolve) => {
-    function processNextResult(data: Data) {
+    function processNextResult(data: ?Data) {
       let {value, done} = gen.next(data);
       if (!done && value) {
         switch (value.type) {
@@ -53,7 +53,7 @@ function run(gen): Promise<mixed> {
     processNextResult();
   });
 }
-let generator = getUserRepos('sstr');
+let generator = getUserRepos('ajilantang');
 let promise = run(generator);
 promise.then((result) => {
   console.log(result);
