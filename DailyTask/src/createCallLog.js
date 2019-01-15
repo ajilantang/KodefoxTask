@@ -7,7 +7,9 @@ type Call = {
   contactName: string;
   timeStamp: string;
 };
+
 function createCallLog() {
+  console.log('tes')
   let listCall: Array<Call> = [];
   return {
     add: (type: CallType, contactName: string, phoneNumber: string) => {
